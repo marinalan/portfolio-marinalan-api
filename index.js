@@ -1,7 +1,5 @@
 const express = require('express');
 const server = express();
-//const jwt = require('express-jwt');
-//const jwksRsa = require('jwks-rsa');
 
 async function runServer() {
   await require('./db').connect();
@@ -10,6 +8,10 @@ async function runServer() {
 
   server.use('/api/v1/portfolios', require('./routes/portfolios'));
   server.use('/api/v1/blogs', require('./routes/blogs'));
+
+	server.get('/test', (req, res) => {
+		res.json({message: 'Hello World'});
+	});
 
   const PORT = parseInt(process.env.PORT, 10) || 3001;
   server.listen(PORT, (err) => {
